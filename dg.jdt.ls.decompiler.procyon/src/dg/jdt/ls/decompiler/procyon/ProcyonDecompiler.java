@@ -65,7 +65,7 @@ public class ProcyonDecompiler extends CachingDecompiler {
 			Gson gson = new Gson();
 			JsonElement jsonElement = gson.toJsonTree(options);
 			settings = gson.fromJson(jsonElement, DecompilerSettings.class);
-			settings.setFormattingOptions(JavaFormattingOptions.createDefault());
+			settings.setJavaFormattingOptions(JavaFormattingOptions.createDefault());
 			if (!((Map<?, ?>) options).containsKey("forceExplicitImports")) {
 				settings.setForceExplicitImports(true);
 			}
@@ -80,7 +80,7 @@ public class ProcyonDecompiler extends CachingDecompiler {
 		}
 
 		String path = uri.getPath();
-		return getContent(new InputTypeLoader(new ClasspathTypeLoader(path)), path, monitor);
+		return getContent(new InputTypeLoader(new ClasspathTypeLoader()), path, monitor);
 	}
 
 	@Override

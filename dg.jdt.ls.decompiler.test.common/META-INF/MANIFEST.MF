@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  org.eclipse.jdt.launching,
  org.junit,
- org.mockito,
  org.eclipse.core.resources,
  dg.jdt.ls.decompiler.common
 Export-Package: dg.jdt.ls.decompiler.test.common

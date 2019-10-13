@@ -14,21 +14,27 @@ import static org.eclipse.jdt.ls.core.internal.handlers.MapFlattener.getValue;
 
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import dg.jdt.ls.decompiler.common.CachingDecompiler;
-
+import org.benf.cfr.reader.api.CfrDriver;
 import org.benf.cfr.reader.api.ClassFileSource;
+import org.benf.cfr.reader.apiunreleased.ClassFileSource2;
+import org.benf.cfr.reader.bytecode.analysis.parse.utils.Pair;
 import org.benf.cfr.reader.entities.ClassFile;
 import org.benf.cfr.reader.entities.Method;
 import org.benf.cfr.reader.state.ClassFileSourceImpl;
 import org.benf.cfr.reader.state.DCCommonState;
 import org.benf.cfr.reader.state.TypeUsageCollector;
+import org.benf.cfr.reader.state.TypeUsageCollectorImpl;
+import org.benf.cfr.reader.util.getopt.GetOptParser;
 import org.benf.cfr.reader.util.getopt.Options;
 import org.benf.cfr.reader.util.getopt.OptionsImpl;
 import org.benf.cfr.reader.util.output.IllegalIdentifierDump;
 import org.benf.cfr.reader.util.output.StreamDumper;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IClassFile;
@@ -68,21 +74,21 @@ public class CFRDecompiler extends CachingDecompiler {
 		if (classFile != null) {
 			return decompileContent(classFile, monitor);
 		}
-
-		Options options = new OptionsImpl(uri.getPath(), null, this.options);
-		return getContent(new ClassFileSourceImpl(options), options, monitor);
+		Options options = OptionsImpl.getFactory().create(this.options);
+		return getContent(new ClassFileSourceImpl(options), options, monitor,classFile.getPath());
 	}
 
 	@Override
 	protected String decompileContent(IClassFile classFile, IProgressMonitor monitor) throws CoreException {
-		Options options = new OptionsImpl(JDTClassFileSource.FAKE_PATH, null, this.options);
-		return getContent(new JDTClassFileSource(classFile, options), options, monitor);
+		Options options = OptionsImpl.getFactory().create(this.options);;
+		return getContent(new JDTClassFileSource(classFile, options), options, monitor,classFile.getPath());
 	}
 
-	private String getContent(ClassFileSource classFileSource, Options options, IProgressMonitor monitor) throws CoreException {
+	private String getContent(ClassFileSource2 classFileSource, Options options, IProgressMonitor monitor,IPath path) throws CoreException {
 		try {
 			DCCommonState commonState = new DCCommonState(options, classFileSource);
-			ClassFile classFile = commonState.getClassFileMaybePath(options.getOption(OptionsImpl.FILENAME));
+			
+			ClassFile classFile = commonState.getClassFileMaybePath(path.toFile().getAbsolutePath());
 			commonState.configureWith(classFile);
 
 			if (((Boolean) options.getOption(OptionsImpl.DECOMPILE_INNER_CLASSES)).booleanValue()) {
@@ -91,7 +97,7 @@ public class CFRDecompiler extends CachingDecompiler {
 
 			classFile.analyseTop(commonState);
 
-			TypeUsageCollector collectingDumper = new TypeUsageCollector(classFile);
+			TypeUsageCollector collectingDumper = new TypeUsageCollectorImpl(classFile);
 			classFile.collectTypeUsages(collectingDumper);
 
 			IllegalIdentifierDump illegalIdentifierDump = IllegalIdentifierDump.Factory.get(options);

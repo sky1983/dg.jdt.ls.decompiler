@@ -11,10 +11,7 @@ final class NoRetryMetadataSystem extends MetadataSystem {
 	private final Set<String> _failedTypes = new HashSet<>();
 
 	NoRetryMetadataSystem() {
-	}
-
-	NoRetryMetadataSystem(String classPath) {
-		super(classPath);
+	    super();
 	}
 
 	NoRetryMetadataSystem(ITypeLoader typeLoader) {

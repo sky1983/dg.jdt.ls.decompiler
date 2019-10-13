@@ -10,5 +10,5 @@ Require-Bundle: org.eclipse.jdt.ls.core,
  org.eclipse.equinox.common,
  com.google.gson,
  dg.jdt.ls.decompiler.common
-Bundle-ClassPath: lib/procyon-decompiler-0.5.30.jar,
+Bundle-ClassPath: lib/procyon-decompiler-0.5.36.jar,
  .

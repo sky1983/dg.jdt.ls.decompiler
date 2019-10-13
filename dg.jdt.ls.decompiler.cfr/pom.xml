@@ -13,9 +13,9 @@
 		<dependency>
 			<groupId>cfr</groupId>
 			<artifactId>cfr</artifactId>
-			<version>0.125.0</version>
+			<version>0.146.0</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/lib/cfr_0_125.jar</systemPath>
+			<systemPath>${basedir}/lib/cfr-0.146.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>
