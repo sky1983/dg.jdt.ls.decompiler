@@ -12,23 +12,23 @@ package dg.jdt.ls.decompiler.cfr;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.ls.core.internal.JDTUtils;
 import org.eclipse.jdt.ls.core.internal.preferences.Preferences;
 import org.junit.Before;
 import org.junit.Test;
-
 import dg.jdt.ls.decompiler.test.common.FakeClassFile;
 
 public class CFRDecompilerTest {
@@ -71,14 +71,14 @@ public class CFRDecompilerTest {
 	@Test
 	public void testGetContent() throws CoreException {
 		CFRDecompiler decompiler = new CFRDecompiler();
-//		String decompiled = decompiler.getContent(uri, monitor);
-//		assertTrue(decompiled.endsWith(EXPECTED_DECOMPILED_CODE));
+		String decompiled = decompiler.getContent(uri, monitor);
+		assertTrue(decompiled.endsWith(EXPECTED_DECOMPILED_CODE));
 	}
 
 	@Test
 	public void testGetSource() throws CoreException, IOException {
 		CFRDecompiler decompiler = new CFRDecompiler();
-		String decompiled = decompiler.getSource(new FakeClassFile(Files.readAllBytes(path)), monitor);
+		String decompiled = decompiler.getSource(new FakeClassFile(Files.readAllBytes(path),path.toFile().getPath()), monitor);
 		assertTrue(decompiled.endsWith(EXPECTED_DECOMPILED_CODE));
 	}
 }

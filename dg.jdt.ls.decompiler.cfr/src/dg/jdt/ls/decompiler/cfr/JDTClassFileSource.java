@@ -1,9 +1,6 @@
 package dg.jdt.ls.decompiler.cfr;
 
 import java.io.IOException;
-import java.util.Collection;
-
-import org.benf.cfr.reader.api.ClassFileSource;
 import org.benf.cfr.reader.bytecode.analysis.parse.utils.Pair;
 import org.benf.cfr.reader.state.ClassFileSourceImpl;
 import org.benf.cfr.reader.util.getopt.Options;

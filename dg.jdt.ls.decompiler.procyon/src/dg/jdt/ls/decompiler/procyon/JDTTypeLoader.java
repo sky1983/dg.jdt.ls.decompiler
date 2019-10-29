@@ -2,7 +2,6 @@ package dg.jdt.ls.decompiler.procyon;
 
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.JavaModelException;
-
 import com.strobel.assembler.InputTypeLoader;
 import com.strobel.assembler.metadata.Buffer;
 import com.strobel.assembler.metadata.ClassFileReader;

@@ -3,10 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: CFR
 Bundle-SymbolicName: dg.jdt.ls.decompiler.cfr;singleton:=true
 Bundle-Version: 0.0.2.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: dg.jdt.ls.decompiler.cfr
 Require-Bundle: org.eclipse.jdt.ls.core,
  org.eclipse.jdt.core,
  org.eclipse.equinox.common,
  dg.jdt.ls.decompiler.common
-Bundle-ClassPath: lib/cfr_0_146.jar,
+Bundle-ClassPath: lib/cfr-0.146.jar,
  .

@@ -2,7 +2,6 @@ package dg.jdt.ls.decompiler.procyon;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.strobel.assembler.metadata.ITypeLoader;
 import com.strobel.assembler.metadata.MetadataSystem;
 import com.strobel.assembler.metadata.TypeDefinition;

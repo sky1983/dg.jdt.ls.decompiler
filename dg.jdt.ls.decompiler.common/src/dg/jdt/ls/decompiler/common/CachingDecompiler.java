@@ -10,15 +10,13 @@
  *******************************************************************************/
 package dg.jdt.ls.decompiler.common;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-
 import java.net.URI;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.ls.core.internal.IDecompiler;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 
 public abstract class CachingDecompiler implements IDecompiler {
 

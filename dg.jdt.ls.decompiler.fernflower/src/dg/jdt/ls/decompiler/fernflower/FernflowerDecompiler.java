@@ -11,30 +11,18 @@
 package dg.jdt.ls.decompiler.fernflower;
 
 import static org.eclipse.jdt.ls.core.internal.handlers.MapFlattener.getValue;
-
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-
-import dg.jdt.ls.decompiler.common.CachingDecompiler;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IClassFile;
-import org.eclipse.jdt.ls.core.internal.IContentProvider;
-import org.eclipse.jdt.ls.core.internal.IDecompiler;
-import org.eclipse.jdt.ls.core.internal.JDTUtils;
 import org.eclipse.jdt.ls.core.internal.preferences.Preferences;
 import org.jetbrains.java.decompiler.main.decompiler.BaseDecompiler;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
-import org.jetbrains.java.decompiler.struct.IDecompiledData;
+import dg.jdt.ls.decompiler.common.CachingDecompiler;
 
 public class FernflowerDecompiler extends CachingDecompiler {
 

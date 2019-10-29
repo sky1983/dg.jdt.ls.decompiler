@@ -11,21 +11,15 @@
 package dg.jdt.ls.decompiler.procyon;
 
 import static org.eclipse.jdt.ls.core.internal.handlers.MapFlattener.getValue;
-
 import java.io.StringWriter;
 import java.net.URI;
 import java.util.Map;
-
-import dg.jdt.ls.decompiler.common.CachingDecompiler;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IClassFile;
-import org.eclipse.jdt.ls.core.internal.IDecompiler;
 import org.eclipse.jdt.ls.core.internal.JDTUtils;
 import org.eclipse.jdt.ls.core.internal.preferences.Preferences;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.strobel.assembler.InputTypeLoader;
@@ -39,6 +33,7 @@ import com.strobel.decompiler.DecompilationOptions;
 import com.strobel.decompiler.DecompilerSettings;
 import com.strobel.decompiler.PlainTextOutput;
 import com.strobel.decompiler.languages.java.JavaFormattingOptions;
+import dg.jdt.ls.decompiler.common.CachingDecompiler;
 
 public class ProcyonDecompiler extends CachingDecompiler {
 

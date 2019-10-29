@@ -11,7 +11,6 @@
 package dg.jdt.ls.decompiler.fernflower;
 
 import java.util.jar.Manifest;
-
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
 
 public class ResultSaver implements IResultSaver {

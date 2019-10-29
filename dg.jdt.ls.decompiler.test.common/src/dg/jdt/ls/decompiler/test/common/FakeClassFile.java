@@ -13,6 +13,7 @@ package dg.jdt.ls.decompiler.test.common;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.jdt.core.CompletionRequestor;
 import org.eclipse.jdt.core.IBuffer;
@@ -30,18 +31,23 @@ import org.eclipse.jdt.core.ISourceRange;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.WorkingCopyOwner;
+import org.eclipse.jdt.internal.core.PackageFragmentRoot;
 
 public class FakeClassFile implements IClassFile {
 	private final byte[] bytes;
 	private final String handleIdentifier;
+	private String filePath;
+	private IPath path;
 
-	public FakeClassFile(byte[] bytes) {
-		this(bytes, "test identifier");
+	public FakeClassFile(byte[] bytes,String filePath) {
+		this(bytes, "test identifier",filePath);
 	}
 
-	public FakeClassFile(byte[] bytes, String handleIdentifier) {
+	public FakeClassFile(byte[] bytes, String handleIdentifier,String filePath) {
 		this.bytes = bytes;
 		this.handleIdentifier = handleIdentifier;
+		this.filePath = filePath;
+		path = Path.fromPortableString(filePath);
 	}
 
 	@Override
@@ -111,7 +117,7 @@ public class FakeClassFile implements IClassFile {
 
 	@Override
 	public IPath getPath() {
-		return null;
+	    return path;
 	}
 
 	@Override

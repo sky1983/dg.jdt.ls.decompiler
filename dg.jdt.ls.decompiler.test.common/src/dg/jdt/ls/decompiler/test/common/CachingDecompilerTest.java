@@ -11,32 +11,30 @@
 package dg.jdt.ls.decompiler.test.common;
 
 import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-
-import dg.jdt.ls.decompiler.common.CachingDecompiler;
-
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.ls.core.internal.preferences.Preferences;
 import org.junit.Before;
 import org.junit.Test;
-
-import dg.jdt.ls.decompiler.test.common.FakeClassFile;
+import dg.jdt.ls.decompiler.common.CachingDecompiler;
 
 public class CachingDecompilerTest {
 
+    public static String HELLO_CLASS_PATH = "testclasses/HelloWorld.class";
 	protected IProgressMonitor monitor = new NullProgressMonitor();
+	Path path;
+	
+	@Before
+    public void getTestClassPath() throws IOException, JavaModelException {
+        path = Paths.get(HELLO_CLASS_PATH);
+    }
 
 	@Test
 	public void testGetContentCaching() throws CoreException, URISyntaxException {
@@ -50,9 +48,9 @@ public class CachingDecompilerTest {
 	@Test
 	public void testGetSourceCaching() throws CoreException, IOException {
 		FakeDecompiler decompiler = new FakeDecompiler();
-		decompiler.getSource(new FakeClassFile(new byte[0], "test"), monitor);
+		decompiler.getSource(new FakeClassFile(new byte[0], "test",path.toFile().getPath()), monitor);
 		assertEquals(decompiler.classFileCalls, 1);
-		decompiler.getSource(new FakeClassFile(new byte[0], "test"), monitor);
+		decompiler.getSource(new FakeClassFile(new byte[0], "test",path.toFile().getPath()), monitor);
 		assertEquals(decompiler.classFileCalls, 1);
 	}
 
